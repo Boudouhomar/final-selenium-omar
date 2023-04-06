@@ -8,6 +8,8 @@ public class HomePage {
 
     By cookieAcceptButtonLocator = By.cssSelector("#sp-cc-accept");
 
+    By bestSellButton = By.cssSelector("#nav-xshop > a:nth-child(3)");
+
     WebDriver driver;
 
     public HomePage(WebDriver driver) {
@@ -17,6 +19,11 @@ public class HomePage {
     public HomePage closeCookiePopup() {
         driver.findElement(cookieAcceptButtonLocator).click();
         return this;
+    }
+
+    public BestSellsPage openBestSellsPage(){
+        driver.findElement(bestSellButton).click();
+        return new BestSellsPage(driver);
     }
 
 }
