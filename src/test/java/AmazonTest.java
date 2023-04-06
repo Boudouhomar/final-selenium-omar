@@ -4,8 +4,10 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import pageobjects.BestSellsPage;
 import pageobjects.CartPage;
 import pageobjects.HomePage;
+import pageobjects.ProductPage;
 
 import java.util.ArrayList;
 
@@ -28,10 +30,11 @@ public class AmazonTest {
 
     @Test
     public void testAmazon(){
-        String productTitle = "Tapo Caméra Surveillance WiFi intérieure 1080P C200, détection de mouvement, audio bidirectionnel, compatible avec Alexa et Google Assistant, pour Bébé/Animaux";
+
         String quantity = "Sous-total (2 articles):";
         HomePage homePage = new HomePage(driver);
         CartPage cartPage = new CartPage(driver);
+        BestSellsPage bestSellsPage = new BestSellsPage(driver);
         homePage.closeCookiePopup()
                 .openBestSellsPage()
                 .showHighTechProducts()
@@ -42,7 +45,7 @@ public class AmazonTest {
 
         ArrayList<String> titleAndQuantity = cartPage.getProductTitleAndQuantity();
 
-        Assert.assertEquals(productTitle,titleAndQuantity.get(0),"Le produit dans le panier ne correspond pas");
+        Assert.assertEquals(bestSellsPage.getChoosenProductTitle(),titleAndQuantity.get(0),"Le produit dans le panier ne correspond pas");
         Assert.assertEquals(quantity,titleAndQuantity.get(1),"La quantité dans le panier ne correspond a la quantité choisie");
 
 
